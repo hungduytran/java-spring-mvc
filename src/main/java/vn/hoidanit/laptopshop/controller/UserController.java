@@ -19,7 +19,15 @@ public class UserController {
     public String getHomePage(Model model) {
         String test = this.userService.handleHello();
         model.addAttribute("eric", test);
+        model.addAttribute("it", "test");
         return "hello";
+    }
+    @RequestMapping("/admin/user")
+    public String getUserPage(Model model) {
+        String test = this.userService.handleHello();
+        model.addAttribute("eric", test);
+        model.addAttribute("it", "test");
+        return "admin/user/create";
     }
 }
 
