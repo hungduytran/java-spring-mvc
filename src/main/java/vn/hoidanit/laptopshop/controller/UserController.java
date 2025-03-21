@@ -10,6 +10,8 @@ import vn.hoidanit.laptopshop.domain.User;
 import vn.hoidanit.laptopshop.repository.UserRepository;
 import vn.hoidanit.laptopshop.service.UserService;
 
+import java.util.List;
+
 @Controller
 public class UserController {
 
@@ -22,6 +24,8 @@ public class UserController {
 
     @RequestMapping("/")
     public String getHomePage(Model model) {
+        List<User> arrUsers = userService.getAllUsersByEmail("1@gmail.com");
+        System.out.println(arrUsers);
         model.addAttribute("eric", "test");
         model.addAttribute("it", "test");
         return "hello";
