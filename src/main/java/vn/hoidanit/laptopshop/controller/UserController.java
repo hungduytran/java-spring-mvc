@@ -38,9 +38,43 @@ public class UserController {
 
     @RequestMapping("/admin/user/{id}")
     public String getUserDetailPage(Model model, @PathVariable long id) {
-        System.out.println("id = " + id);
+        User user = userService.getUserById(id);
         model.addAttribute("id", id);
+        model.addAttribute("user", user);
         return "admin/user/show";
+    }
+    @RequestMapping("/admin/user/update/{id}") // GET
+    public String getUpdateUserPage(Model model, @PathVariable long id) {
+        User currentUser = this.userService.getUserById(id);
+        model.addAttribute("newUser", currentUser);
+        return "admin/user/update";
+    }
+    @PostMapping("/admin/user/update")
+    public String postUpdateUser(Model model, @ModelAttribute("newUser") User hoidanit) {
+        User currentUser = this.userService.getUserById(hoidanit.getId());
+        if (currentUser != null) {
+            currentUser.setAddress(hoidanit.getAddress());
+            currentUser.setFullName(hoidanit.getFullName());
+            currentUser.setPhone(hoidanit.getPhone());
+
+            this.userService.handleSaveUser(currentUser);
+        }
+        return "redirect:/admin/user";
+    }
+
+    @GetMapping("/admin/user/delete/{id}") // GET
+    public String getDeleteUserPage(Model model, @PathVariable long id) {
+        model.addAttribute("id", id);
+//        User user = new User();
+//        user.setId(id);
+        model.addAttribute("newUser", new User());
+        return "admin/user/delete";
+    }
+
+    @PostMapping("/admin/user/delete") // GET
+    public String postDeleteUser(Model model,  @ModelAttribute("newUser") User eric) {
+        this.userService.deleteUser(eric.getId());
+        return "redirect:/admin/user";
     }
 
     @RequestMapping("/admin/user/create") // GET

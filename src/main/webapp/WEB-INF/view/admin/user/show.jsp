@@ -27,12 +27,13 @@
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">ID: ${id}</li>
-                    <li class="list-group-item">EMAIL:</li>
-                    <li class="list-group-item">FUll NAME:</li>
-                    <li class="list-group-item">ADDRESS:</li>
+                    <li class="list-group-item">EMAIL: ${user.email}</li>
+                    <li class="list-group-item">FUll NAME: ${user.fullName}</li>
+                    <li class="list-group-item">ADDRESS: ${user.address}</li>
 
                 </ul>
             </div>
+            <a href="/admin/user" class="btn btn-success mt-3">BACK</a>
 
         </div>
     </div>
